@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 
-type ColorCounts = {
+export type ColorCounts = {
     red: number;
     green: number;
     blue: number;
