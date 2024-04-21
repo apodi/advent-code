@@ -32,4 +32,6 @@ export async function sumCalibrationValues(filePath: string): Promise<number> {
 const filePath = 'calibration_document.txt'; 
 sumCalibrationValues(filePath).then(totalSum => {
     console.log(`The total sum of calibration values is: ${totalSum}`);
+}).catch(error => {
+    //console.error('Error:', error);
 });

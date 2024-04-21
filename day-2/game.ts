@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 
-export type ColorCounts = {
+type ColorCounts = {
     red: number;
     green: number;
     blue: number;
 };
 
-function parseCubeCounts(cubeString: string): ColorCounts {
+export function parseCubeCounts(cubeString: string): ColorCounts {
     const counts: ColorCounts = { red: 0, green: 0, blue: 0 };
     const parts = cubeString.split(", ");
     parts.forEach(part => {
@@ -19,7 +19,7 @@ function parseCubeCounts(cubeString: string): ColorCounts {
     return counts;
 }
 
-function isPossibleGame(subsets: string[], bag: ColorCounts): boolean {
+export function isPossibleGame(subsets: string[], bag: ColorCounts): boolean {
     return subsets.every(subset => {
         const counts = parseCubeCounts(subset);
         return counts.red <= bag.red && counts.green <= bag.green && counts.blue <= bag.blue;
@@ -45,7 +45,7 @@ export async function sumOfPossibleGameIDs(filePath: string, bag: ColorCounts): 
     }
 
     if (rl.close) {
-        rl.close();
+        rl.close(); // Close readline stream
     }
     if (fileStream && typeof fileStream.close === 'function') {
         fileStream.close();
@@ -63,4 +63,6 @@ const bagLimits: ColorCounts = {
 
 sumOfPossibleGameIDs(filePath, bagLimits).then(totalSum => {
     console.log(`The total sum of possible game IDs is: ${totalSum}`);
+}).catch(error => {
+    //console.error('Error:', error);
 });
